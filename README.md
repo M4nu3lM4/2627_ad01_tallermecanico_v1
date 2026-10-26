@@ -1,6 +1,6 @@
 # Tarea: Taller mecánico
 ## Profesor: Andrés Rubio del Río
-## Alumno:
+## Alumno: Manuel Martínez Alcalá
 
 Nuestro cliente está tan encantado con todo el trabajo realizado en las fases anteriores del proyecto del taller mecánico. Sin embargo, quiere dar un paso más en dicho proyecto para lo cual que nos pide que añadamos persistencia a los datos pero sin necesidad de tener una base de datos. Aunque es consciente que esa es la mejor opción, nos pide que en este spring se añada persistencia a los datos pero utilizando ficheros JSON.
 
