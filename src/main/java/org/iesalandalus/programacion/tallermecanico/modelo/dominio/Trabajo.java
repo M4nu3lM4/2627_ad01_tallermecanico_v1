@@ -14,7 +14,7 @@ import java.util.Objects;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "Trabajo"
+        property = "tipo"
 )
 
 
