@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.jso
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.*;
@@ -17,13 +18,18 @@ public class Trabajos implements ITrabajos {
     private static final String FICHERO_TRABAJOS = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "xml", File.separator, "trabajos.json");
     private static Trabajos instancia;
     private static final TypeReference<List<Trabajo>> TYPE_LIST_TRABAJO = new TypeReference<>() { };
-    private final ObjectMapper mapper;
+    private static final ObjectMapper mapper = new ObjectMapper();
+
+    static {
+
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.findAndRegisterModules();
+    }
 
 
     private Trabajos(){
-        mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
     }
 
     static Trabajos getInstancia() {
