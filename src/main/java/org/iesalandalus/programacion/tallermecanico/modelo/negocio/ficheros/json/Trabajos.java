@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Trabajos implements ITrabajos {
-    private static final String FICHERO_TRABAJOS = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "xml", File.separator, "trabajos.json");
+    private static final String FICHERO_TRABAJOS = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "json", File.separator, "trabajos.json");
     private static Trabajos instancia;
     private static final TypeReference<List<Trabajo>> TYPE_LIST_TRABAJO = new TypeReference<>() { };
     private static final ObjectMapper mapper = new ObjectMapper();
