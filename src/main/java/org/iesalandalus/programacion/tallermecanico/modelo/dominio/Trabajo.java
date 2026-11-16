@@ -1,9 +1,6 @@
 package org.iesalandalus.programacion.tallermecanico.modelo.dominio;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.*;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 
 import java.time.LocalDate;
@@ -26,13 +23,17 @@ import java.util.Objects;
 public abstract class Trabajo {
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static final float FACTOR_DIA = 10F;
-
+    @JsonProperty("cliente")
     private Cliente cliente;
+    @JsonProperty("vehiculo")
     private Vehiculo vehiculo;
+    @JsonProperty("fechaInicio")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaInicio;
+    @JsonProperty("fechaFin")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaFin;
+    @JsonProperty("horas")
     private int horas;
 
     protected Trabajo(){}
@@ -52,7 +53,7 @@ public abstract class Trabajo {
         fechaFin = trabajo.fechaFin;
         horas = trabajo.horas;
     }
-
+    @JsonIgnore
     public static Trabajo copiar(Trabajo trabajo) {
         Objects.requireNonNull(trabajo, "El trabajo no puede ser nulo.");
         Trabajo trabajoCopiado = null;
@@ -63,34 +64,34 @@ public abstract class Trabajo {
         }
         return trabajoCopiado;
     }
-
+    @JsonIgnore
     public static Trabajo get(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         return new Revision(Cliente.get("11111111H"), vehiculo, LocalDate.now());
     }
-
+    @JsonProperty("cliente")
     public Cliente getCliente() {
         return cliente;
     }
-
+    @JsonProperty("cliente")
     private void setCliente(Cliente cliente) {
         Objects.requireNonNull(cliente, "El cliente no puede ser nulo.");
         this.cliente = cliente;
     }
-
+    @JsonProperty("vehiculo")
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
-
+    @JsonProperty("vehiculo")
     private void setVehiculo(Vehiculo vehiculo) {
         Objects.requireNonNull(vehiculo, "El vehículo no puede ser nulo.");
         this.vehiculo = vehiculo;
     }
-
+    @JsonProperty("fechaInicio")
     public LocalDate getFechaInicio() {
         return fechaInicio;
     }
-
+    @JsonProperty("fechaInicio")
     private void setFechaInicio(LocalDate fechaInicio) {
         Objects.requireNonNull(fechaInicio, "La fecha de inicio no puede ser nula.");
         if (fechaInicio.isAfter(LocalDate.now())) {
@@ -98,11 +99,11 @@ public abstract class Trabajo {
         }
         this.fechaInicio = fechaInicio;
     }
-
+    @JsonProperty("fechaFin")
     public LocalDate getFechaFin() {
         return fechaFin;
     }
-
+    @JsonProperty("fechaFin")
     private void setFechaFin(LocalDate fechaFin) {
         Objects.requireNonNull(fechaFin, "La fecha de fin no puede ser nula.");
         if (fechaFin.isBefore(fechaInicio)) {
@@ -113,7 +114,7 @@ public abstract class Trabajo {
         }
         this.fechaFin = fechaFin;
     }
-
+    @JsonProperty("horas")
     public int getHoras() {
         return horas;
     }
@@ -127,7 +128,7 @@ public abstract class Trabajo {
         }
         this.horas += horas;
     }
-
+@JsonIgnore
     public boolean estaCerrado() {
         return fechaFin != null;
     }
@@ -143,11 +144,11 @@ public abstract class Trabajo {
     public float getPrecio() {
         return getPrecioFijo() + getPrecioEspecifico();
     }
-
+@JsonIgnore
     private float getPrecioFijo() {
         return (estaCerrado()) ? FACTOR_DIA * getDias() : 0;
     }
-
+@JsonIgnore
     private float getDias() {
         return (estaCerrado()) ? (int) ChronoUnit.DAYS.between(fechaInicio, fechaFin) : 0;
     }

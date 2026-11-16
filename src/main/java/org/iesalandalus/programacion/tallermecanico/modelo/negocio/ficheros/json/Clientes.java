@@ -4,6 +4,7 @@ package org.iesalandalus.programacion.tallermecanico.modelo.negocio.ficheros.jso
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.iesalandalus.programacion.tallermecanico.modelo.TallerMecanicoExcepcion;
 import org.iesalandalus.programacion.tallermecanico.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.tallermecanico.modelo.negocio.IClientes;
@@ -15,14 +16,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class Clientes implements IClientes {
-    private static final String FICHERO_CLIENTES = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "json", File.separator, "clientes.json");
+    private static final String FICHERO_CLIENTES = "datos/ficheros/json/clientes.json";
     private static Clientes instancia;
 
     private final ObjectMapper mapper;
 
-    private Clientes(){mapper = new ObjectMapper();}
+    private Clientes(){
+        mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+    }
 
-    static Clientes getInstancia() {
+    public static Clientes getInstancia() {
         if (instancia == null) {
             instancia = new Clientes();
         }

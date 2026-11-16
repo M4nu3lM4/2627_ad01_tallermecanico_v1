@@ -1,0 +1,13 @@
+[ {
+  "nombre" : "Patricio Estrella",
+  "dni" : "11111111H",
+  "telefono" : "950111111"
+}, {
+  "nombre" : "Manuel",
+  "dni" : "78120746G",
+  "telefono" : "644896133"
+}, {
+  "nombre" : "Bob Esponja",
+  "dni" : "11223344B",
+  "telefono" : "950112233"
+} ]

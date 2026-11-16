@@ -1,0 +1,47 @@
+[ {
+  "tipo" : "Revision",
+  "cliente" : {
+    "nombre" : "Patricio Estrella",
+    "dni" : "11111111H",
+    "telefono" : "950111111"
+  },
+  "vehiculo" : {
+    "marca" : "Seat",
+    "modelo" : "León",
+    "matricula" : "1111BBB"
+  },
+  "fechaInicio" : "2025-11-01",
+  "fechaFin" : "2025-11-02",
+  "horas" : 0
+}, {
+  "tipo" : "Mecanico",
+  "precioMaterial" : 7.5,
+  "cliente" : {
+    "nombre" : "Manuel",
+    "dni" : "78120746G",
+    "telefono" : "644896133"
+  },
+  "vehiculo" : {
+    "marca" : "Lamborghini",
+    "modelo" : "huracan",
+    "matricula" : "3333DDD"
+  },
+  "fechaInicio" : "2025-09-09",
+  "fechaFin" : "2025-09-11",
+  "horas" : 48
+}, {
+  "tipo" : "Mecanico",
+  "precioMaterial" : 0.0,
+  "cliente" : {
+    "nombre" : "Bob Esponja",
+    "dni" : "11223344B",
+    "telefono" : "950112233"
+  },
+  "vehiculo" : {
+    "marca" : "Renault",
+    "modelo" : "Megane",
+    "matricula" : "2222CCC"
+  },
+  "fechaInicio" : "2025-10-30",
+  "horas" : 0
+} ]

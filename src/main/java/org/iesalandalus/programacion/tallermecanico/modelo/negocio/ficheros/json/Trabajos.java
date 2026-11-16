@@ -15,7 +15,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Trabajos implements ITrabajos {
-    private static final String FICHERO_TRABAJOS = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "json", File.separator, "trabajos.json");
+    private static final String FICHERO_TRABAJOS = "datos/ficheros/json/trabajos.json";
+    //private static final String FICHERO_TRABAJOS = String.format("%s%s%s%s%s%s%s", "datos", File.separator, "ficheros", File.separator, "json", File.separator, "trabajos.json");
     private static Trabajos instancia;
     private static final TypeReference<List<Trabajo>> TYPE_LIST_TRABAJO = new TypeReference<>() { };
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -25,6 +26,7 @@ public class Trabajos implements ITrabajos {
         mapper.registerModule(new JavaTimeModule());
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.findAndRegisterModules();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
 
@@ -32,7 +34,7 @@ public class Trabajos implements ITrabajos {
 
     }
 
-    static Trabajos getInstancia() {
+    public static Trabajos getInstancia() {
         if (instancia == null) {
             instancia = new Trabajos();
         }
@@ -47,7 +49,7 @@ public class Trabajos implements ITrabajos {
         try {
             return mapper.readValue(fichero, TYPE_LIST_TRABAJO);
         } catch (IOException e) {
-            throw new IllegalStateException("No se ha podido leer el fichero de trabajos.", e);
+            throw new RuntimeException("No se ha podido leer el fichero de trabajos.", e);
         }
     }
 
@@ -57,7 +59,7 @@ public class Trabajos implements ITrabajos {
             fichero.getParentFile().mkdirs();
             mapper.writerFor(TYPE_LIST_TRABAJO).withDefaultPrettyPrinter().writeValue(fichero, trabajos);
         } catch (IOException e) {
-            throw new IllegalStateException("No se ha podido escribir en el fichero de trabajos.", e);
+            throw new RuntimeException("No se ha podido escribir en el fichero de trabajos.", e);
         }
 
     }
